@@ -37,27 +37,46 @@
                     <span class="loginCheckmark"></span>
                 </label>
             </div>
-            <button id="loginButton" disabled>
-                <div id="loginButtonContent">
-                    LOGIN
-                    <svg id="loginSVG" viewBox="0 0 24.87 13.97">
-                        <defs>
-                            <style>.arrowLine{fill:none;stroke:#FFF;stroke-width:2px;transition: 0.25s ease;}</style>
-                        </defs>
-                        <polyline class="arrowLine" points="0.71 13.26 12.56 1.41 24.16 13.02"/>
-                    </svg>
-                    <div class="circle-loader">
-                        <div class="checkmark draw"></div>
+            <div id="loginButtons">
+                <button id="loginButton" disabled>
+                    <div id="loginButtonContent">
+                        LOGIN
+                        <svg id="loginSVG" viewBox="0 0 24.87 13.97">
+                            <defs>
+                                <style>.arrowLine{fill:none;stroke:#FFF;stroke-width:2px;transition: 0.25s ease;}</style>
+                            </defs>
+                            <polyline class="arrowLine" points="0.71 13.26 12.56 1.41 24.16 13.02"/>
+                        </svg>
+                        <div class="circle-loader">
+                            <div class="checkmark draw"></div>
+                        </div>
+                        <!--<div class="spinningCircle" id="loginSpinner"></div>-->
                     </div>
-                    <!--<div class="spinningCircle" id="loginSpinner"></div>-->
-                </div>
-            </button>
+                </button>
+                <spacer> </spacer>
+                <button id="msloginButton" disabled>
+                    <div id="msloginButtonContent">
+                        MICROSOFT
+                        <svg id="msloginSVG" viewBox="0 0 24.87 13.97">
+                            <defs>
+                                <style>.arrowLine{fill:none;stroke:#FFF;stroke-width:2px;transition: 0.25s ease;}</style>
+                            </defs>
+                            <polyline class="arrowLine" points="0.71 13.26 12.56 1.41 24.16 13.02"/>
+                        </svg>
+                        <div class="circle-loader">
+                            <div class="checkmark draw"></div>
+                        </div>
+                        <!--<div class="spinningCircle" id="loginSpinner"></div>-->
+                    </div>
+                </button>
+            </div>
+            
             <div id="loginDisclaimer">
                 <span class="loginSpanDim" id="loginRegisterSpan">
                     <a href="https://minecraft.net/store/minecraft-java-edition/">Need an Account?</a>
                 </span>
                 <p class="loginDisclaimerText">Your password is sent directly to mojang and never stored.</p>
-                <p class="loginDisclaimerText">Helios Launcher is not affiliated with Mojang AB.</p>
+                <p class="loginDisclaimerText">Feather64 Launcher is not affiliated with Mojang AB.</p>
             </div>
         </form>
     </div>

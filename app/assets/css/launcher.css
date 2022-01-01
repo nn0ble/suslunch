@@ -746,7 +746,72 @@ body, button {
     }
 }
 
+/* Microsoft Login Button*/
 
+#msloginButton {
+    background: none;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border: none;
+    padding: 15px 5px;
+    margin: 10px 0px;
+    cursor: pointer;
+    position: relative;
+    right: -20px;
+    transition: 0.5s ease;
+}
+#msloginButton:disabled {
+    color: rgba(255, 255, 255, 0.75);
+    pointer-events: none;
+}
+#msloginButton[loading] {
+    color: #fff;
+}
+#msloginButton:hover,
+#msloginButton:focus {
+    text-shadow: 0px 0px 20px #fff;
+    outline: none;
+}
+#msloginButton:active {
+    color: #c7c7c7;
+    text-shadow:  0px 0px 20px #c7c7c7;
+}
+#msloginSVG {
+    -webkit-transform: translate3d(0, 0, 0);
+    overflow: visible;
+    transform: rotate(90deg);
+    margin-left: 20px;
+    transition: 0.25s ease;
+    width: 20px;
+    height: 20px;
+}
+#msloginButton:hover #loginSVG,
+#msloginButton:focus #loginSVG {
+    -webkit-filter: drop-shadow(0px 0px 2px #fff);
+}
+#msloginButton:active #loginSVG .arrowLine {
+    stroke: #c7c7c7;
+}
+#msloginButton:active #loginSVG {
+    -webkit-filter: drop-shadow(0px 0px 2px #c7c7c7);
+}
+#msloginButton:disabled #loginSVG .arrowLine {
+    stroke: rgba(255, 255, 255, 0.75);
+}
+
+#msloginButtonContent {
+    display: flex;
+    align-items: center;
+}
+
+#msloginButton .circle-loader,
+#msloginButton[loading] #loginSVG {
+    display: none;
+}
+#msloginButton[loading] .circle-loader,
+#msloginButton #loginSVG {
+    display: initial;
+}
 
 /*.spinningCircle {
     margin-left: 20px;
