@@ -89,24 +89,10 @@ document.getElementById('launch_button').addEventListener('click', function(e){
     loggerLanding.log('Launching game..')
     const mcVersion = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getMinecraftVersion()
     const jExe = ConfigManager.getJavaExecutable()
-    if(jExe == null){
-        asyncSystemScan(mcVersion)
-    } else {
 
-        setLaunchDetails(Lang.queryJS('landing.launch.pleaseWait'))
-        toggleLaunchArea(true)
-        setLaunchPercentage(0, 100)
-
-        const jg = new JavaGuard(mcVersion)
-        jg._validateJavaBinary(jExe).then((v) => {
-            loggerLanding.log('Java version meta', v)
-            if(v.valid){
-                dlAsync()
-            } else {
-                asyncSystemScan(mcVersion)
-            }
-        })
-    }
+    setLaunchDetails(Lang.queryJS('landing.launch.pleaseWait'))
+    toggleLaunchArea(true)
+    setLaunchPercentage(0, 100)
 })
 
 // Bind settings button
@@ -124,14 +110,16 @@ document.getElementById('avatarOverlay').onclick = (e) => {
 }
 
 // Bind selected account
-function updateSelectedAccount(authUser){
+function updateSelectedAccount(profile){
     let username = 'No Account Selected'
-    if(authUser != null){
-        if(authUser.displayName != null){
-            username = authUser.displayName
+    if(profile != null){
+        if(profile.name != null){
+            username = profile.name
         }
-        if(authUser.uuid != null){
-            document.getElementById('avatarContainer').style.backgroundImage = `url('https://mc-heads.net/body/${authUser.uuid}/right')`
+        if(profile.id != null){
+            document.getElementById('avatarContainer').style.backgroundImage = `url('https://mc-heads.net/body/${profile.id}/right')`
+        } else if(profile.uuid != null){
+            document.getElementById('avatarContainer').style.backgroundImage = `url('https://mc-heads.net/body/${profile.uuid}/right')`
         }
     }
     user_text.innerHTML = username

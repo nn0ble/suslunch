@@ -340,11 +340,10 @@ exports.updateAuthAccount = function(uuid, accessToken){
  * 
  * @returns {Object} The authenticated account object created by this action.
  */
-exports.addAuthAccount = function(uuid, accessToken, username, displayName){
+exports.addAuthAccount = function(uuid, accessToken, displayName){
     config.selectedAccount = uuid
     config.authenticationDatabase[uuid] = {
         accessToken,
-        username: username.trim(),
         uuid: uuid.trim(),
         displayName: displayName.trim()
     }
