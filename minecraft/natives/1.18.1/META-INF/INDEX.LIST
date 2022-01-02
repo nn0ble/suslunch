@@ -1,0 +1,13 @@
+JarIndex-Version: 1.0
+
+lwjgl-openal-natives-windows.jar
+META-INF
+META-INF/versions
+META-INF/versions/9
+OpenAL.dll
+OpenAL.dll.git
+OpenAL.dll.sha1
+OpenAL32.dll
+OpenAL32.dll.git
+OpenAL32.dll.sha1
+
