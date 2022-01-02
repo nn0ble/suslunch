@@ -96,13 +96,13 @@ document.getElementById('launch_button').addEventListener('click', function(e){
         // handling authentication outside before you initialize
         // MCLC so you can handle auth based errors and validation!
         authorization: ConfigManager.getSelectedAccount(),
-        root: "./minecraft",
+        root: ConfigManager.getDataDirectory(),
         version: {
             number: "1.18.1",
             type: "release"
         },
         memory: {
-            max: "6G",
+            max: "16G",
             min: "4G"
         }
     }
