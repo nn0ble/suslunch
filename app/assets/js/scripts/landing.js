@@ -95,7 +95,7 @@ document.getElementById('launch_button').addEventListener('click', function(e){
         // the getAuth function through the authorization field and instead
         // handling authentication outside before you initialize
         // MCLC so you can handle auth based errors and validation!
-        authorization: Authenticator.getAuth(),
+        authorization: ConfigManager.getSelectedAccount(),
         root: "./minecraft",
         version: {
             number: "1.18.1",

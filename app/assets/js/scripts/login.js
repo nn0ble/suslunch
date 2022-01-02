@@ -331,7 +331,7 @@ msloginButton.addEventListener('click', () => {
 
         updateSelectedAccount(result.profile)
         
-        ConfigManager.addAuthAccount(result.profile.id, result.access_token, result.profile.name);
+        ConfigManager.addAuthAccount(result.profile.id, result.access_token, result.profile.name, 'msa');
         if(ConfigManager.getClientToken() == null){
             ConfigManager.setClientToken(token)
         }

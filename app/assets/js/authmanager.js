@@ -30,7 +30,7 @@ const loggerSuccess = LoggerUtil('%c[AuthManager]', 'color: #209b07; font-weight
 exports.addAccount = async function(username, password){
     try {
         const session = await Authenticator.getAuth(loginUsername.value, loginPassword.value);
-            const ret = ConfigManager.addAuthAccount(session.uuid, session.access_token, session.name)
+            const ret = ConfigManager.addAuthAccount(session.uuid, session.access_token, session.name, 'mojang')
             if(ConfigManager.getClientToken() == null){
                 ConfigManager.setClientToken(session.client_token)
             }
@@ -52,7 +52,7 @@ exports.addAccount = async function(username, password){
 exports.removeAccount = async function(uuid){
     try {
         const authAcc = ConfigManager.getAuthAccount(uuid)
-        await Mojang.invalidate(authAcc.accessToken, ConfigManager.getClientToken())
+        await Mojang.invalidate(authAcc.access_token, ConfigManager.getClientToken())
         ConfigManager.removeAuthAccount(uuid)
         ConfigManager.save()
         return Promise.resolve()

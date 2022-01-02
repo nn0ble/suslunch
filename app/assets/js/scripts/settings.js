@@ -400,6 +400,7 @@ function processLogOut(val, isLastAccount){
         }
     })
     $(parent).fadeOut(250, () => {
+        console.log('Successfully removed' + parent.getAttribute('uuid'))
         parent.remove()
     })
 }
