@@ -2,9 +2,6 @@ const {
     Client,
     Authenticator
 } = require('minecraft-launcher-core');
-const msmc = require("msmc");
-const fetch = require("node-fetch");
-
 /**
  * Script for login.ejs
  */
@@ -313,9 +310,13 @@ loginButton.addEventListener('click', () => {
 // Bind Microsoft login button behavior.
 msloginButton.addEventListener('click', () => {
 
+    
+const msmc = require("msmc");
+const fetch = require("node-fetch");
+
     // Show loading stuff.
     loginLoading(true)
-    msmc.setFetch(fetch)
+    msmc.setFetch(fetch);
     msmc.fastLaunch("raw",
         (update) => {
             //A hook for catching loading bar events and errors, standard with MSMC

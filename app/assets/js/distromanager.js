@@ -539,6 +539,7 @@ exports.pullRemote = function(){
     return new Promise((resolve, reject) => {
         //const distroURL = 'C:\\Users\\nnoble\\Projects\\suslunch\\docs\\sample_distribution.json'
         const distroURL = 'https://gist.githubusercontent.com/dscalzi/53b1ba7a11d26a5c353f9d5ae484b71b/raw/'
+        //const distroURL = 'https://gist.githubusercontent.com/nn0ble/87e262bdcefd9c5d4b0a7ef998125b28/raw/'
         const opts = {
             url: distroURL,
             timeout: 500

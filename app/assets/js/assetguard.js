@@ -13,6 +13,7 @@ const tar           = require('tar-fs')
 const zlib          = require('zlib')
 
 const ConfigManager = require('./configmanager')
+const VersionManager = require('./versionmanager')
 const DistroManager = require('./distromanager')
 const isDev         = require('./isdev')
 
@@ -1828,6 +1829,9 @@ class AssetGuard extends EventEmitter {
         try {
             if(!ConfigManager.isLoaded()){
                 ConfigManager.load()
+            }
+            if(!VersionManager.isLoaded()){
+                VersionManager.load()
             }
             DistroManager.setDevMode(dev)
             const dI = await DistroManager.pullLocal()

@@ -87,7 +87,8 @@ const DEFAULT_CONFIG = {
             resHeight: 720,
             fullscreen: false,
             autoConnect: true,
-            launchDetached: true
+            launchDetached: true,
+            version: '1.18.1'
         },
         launcher: {
             allowPrerelease: false,
@@ -304,6 +305,10 @@ exports.setSelectedServer = function(serverID){
  */
 exports.getAuthAccounts = function(){
     return config.authenticationDatabase
+}
+
+exports.getVersion = function(){
+    return config.settings.game.version
 }
 
 /**

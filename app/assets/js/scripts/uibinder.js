@@ -63,7 +63,7 @@ function showMainUI(data){
     }
 
     prepareSettings(true)
-    updateSelectedServer(data.getServer(ConfigManager.getSelectedServer()))
+    //updateSelectedServer(data.getServer(ConfigManager.getSelectedServer()))
     refreshServerStatus()
     setTimeout(() => {
         document.getElementById('frameBar').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
@@ -324,7 +324,7 @@ async function validateSelectedAccount(){
             const accLen = Object.keys(ConfigManager.getAuthAccounts()).length
             setOverlayContent(
                 'Failed to Refresh Login',
-                `We were unable to refresh the login for <strong>${selectedAcc.displayName}</strong>. Please ${accLen > 0 ? 'select another account or ' : ''} login again.`,
+                `We were unable to refresh the login for <strong>${selectedAcc.name}</strong>. Please ${accLen > 0 ? 'select another account or ' : ''} login again.`,
                 'Login',
                 'Select Another Account'
             )
@@ -335,7 +335,7 @@ async function validateSelectedAccount(){
                 loginViewOnCancel = getCurrentView()
                 if(accLen > 0){
                     loginViewCancelHandler = () => {
-                        ConfigManager.addAuthAccount(selectedAcc.uuid, selectedAcc.accessToken, selectedAcc.username, selectedAcc.displayName)
+                        ConfigManager.addAuthAccount(selectedAcc.uuid, selectedAcc.accessToken, selectedAcc.username, selectedAcc.name)
                         ConfigManager.save()
                         validateSelectedAccount()
                     }

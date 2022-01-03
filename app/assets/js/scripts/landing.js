@@ -12,6 +12,7 @@ const DiscordWrapper          = require('./assets/js/discordwrapper')
 const Mojang                  = require('./assets/js/mojang')
 const ProcessBuilder          = require('./assets/js/processbuilder')
 const ServerStatus            = require('./assets/js/serverstatus')
+const { config } = require('process')
 
 // Launch Elements
 const launch_content          = document.getElementById('launch_content')
@@ -95,26 +96,44 @@ document.getElementById('launch_button').addEventListener('click', function(e){
         // the getAuth function through the authorization field and instead
         // handling authentication outside before you initialize
         // MCLC so you can handle auth based errors and validation!
+
         authorization: ConfigManager.getSelectedAccount(),
         root: ConfigManager.getDataDirectory(),
         version: {
-            number: "1.18.1",
+            number: ConfigManager.getVersion(),
             type: "release"
         },
+        server: {
+            host: "hypixel.net"
+        },
         memory: {
-            max: "16G",
-            min: "4G"
+            max: ConfigManager.getMaxRAM(),
+            min: ConfigManager.getMinRAM()
+        },
+        window: {
+            width: ConfigManager.getGameWidth(),
+            height: ConfigManager.getGameHeight(),
+            fullscreen: ConfigManager.getFullscreen()
         }
+        
     }
 
     launcher.launch(opts);
 
-    launcher.on('debug', (e) => console.log(e));
-    launcher.on('data', (e) => console.log(e));
-
     setLaunchDetails(Lang.queryJS('landing.launch.pleaseWait'))
     toggleLaunchArea(true)
     setLaunchPercentage(0, 100)
+    launcher.on('progress', (e) => {
+        console.log(e)
+        if(e.task > 0) {
+            setLaunchPercentage(e.task, 100)
+        } else {
+            setLaunchPercentage(100, 100)
+            setLaunchDetails('Launching game..')
+            toggleLaunchArea(false)
+        }
+        
+    });
 })
 
 // Bind settings button
@@ -149,6 +168,7 @@ function updateSelectedAccount(profile){
 updateSelectedAccount(ConfigManager.getSelectedAccount())
 
 // Bind selected server
+/*
 function updateSelectedServer(serv){
     if(getCurrentView() === VIEWS.settings){
         saveAllModConfigurations()
@@ -161,8 +181,9 @@ function updateSelectedServer(serv){
     }
     setLaunchEnabled(serv != null)
 }
+*/
 // Real text is set in uibinder.js on distributionIndexDone.
-server_selection_button.innerHTML = '\u2022 Loading..'
+server_selection_button.innerHTML = '\u2022 Minecraft Version ' + ConfigManager.getVersion()
 server_selection_button.onclick = (e) => {
     e.target.blur()
     toggleServerSelection(true)
