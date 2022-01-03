@@ -176,7 +176,7 @@ document.getElementById('serverSelectConfirm').addEventListener('click', () => {
     for(let i=0; i<listings.length; i++){
         if(listings[i].hasAttribute('selected')){
             const serv = DistroManager.getDistribution().getServer(listings[i].getAttribute('servid'))
-            updateSelectedServer(serv)
+            //updateSelectedServer(serv)
             refreshServerStatus(true)
             toggleOverlay(false)
             return
@@ -185,7 +185,7 @@ document.getElementById('serverSelectConfirm').addEventListener('click', () => {
     // None are selected? Not possible right? Meh, handle it.
     if(listings.length > 0){
         const serv = DistroManager.getDistribution().getServer(listings[i].getAttribute('servid'))
-        updateSelectedServer(serv)
+        //updateSelectedServer(serv)
         toggleOverlay(false)
     }
 })
@@ -266,14 +266,14 @@ function populateServerListings(){
     const VersionManager = require('./assets/js/versionmanager')
     const giaSel = ConfigManager.getSelectedServer()
     let htmlString = ''
-    htmlString += `<button class="serverListing" servid="${VersionManager.getVersion()}" ${VersionManager.getID() === giaSel ? 'selected' : ''}>
-        <img class="serverListingImg" src="${VersionManager.getIcon()}"/>
+    htmlString += `<button class="serverListing" servid="${VersionManager.getVersion(0)}" selected>
+        <img class="serverListingImg" src="${VersionManager.getIcon(0)}"/>
         <div class="serverListingDetails">
-            <span class="serverListingName">${VersionManager.getName()}</span>
-            <span class="serverListingDescription">${VersionManager.getDescription()}</span>
+            <span class="serverListingName">${VersionManager.getName(0)}</span>
+            <span class="serverListingDescription">${VersionManager.getDescription(0)}</span>
             <div class="serverListingInfo">
-                <div class="serverListingVersion">${VersionManager.getVersion()}</div>
-                ${VersionManager.isMainProfile() ? `<div class="serverListingStarWrapper">
+                <div class="serverListingVersion">${VersionManager.getVersion(0)}</div>
+                ${VersionManager.isMainProfile(0) ? `<div class="serverListingStarWrapper">
                     <svg id="Layer_1" viewBox="0 0 107.45 104.74" width="20px" height="20px">
                         <defs>
                             <style>.cls-1{fill:#fff;}.cls-2{fill:none;stroke:#fff;stroke-miterlimit:10;}</style>
@@ -306,7 +306,7 @@ function populateAccountListings(){
 
 function prepareServerSelectionList(){
     populateServerListings()
-    setServerListingHandlers()
+    //setServerListingHandlers()
 }
 
 function prepareAccountSelectionList(){

@@ -152,26 +152,26 @@ exports.getCommonDirectory = function(){
     return path.join(exports.getDataDirectory(), 'common')
 }
 
-exports.getID= function(){
-    return config.profiles.id
+exports.getID= function(index){
+    return config.profiles[index].id
 }
 
-exports.getIcon = function(){
-    return config.profiles.icon
+exports.getIcon = function(index){
+    return config.profiles[index].icon
 }
 
-exports.getName = function(){
-    return config.profiles.name
+exports.getName = function(index){
+    return config.profiles[index].name
 }
 
-exports.getDescription = function(){
-    return config.profiles.description
+exports.getDescription = function(index){
+    return config.profiles[index].description
 }
 
-exports.getVersion = function(){
-    return config.profiles.version
+exports.getVersion = function(index){
+    return config.profiles[index].version
 }
 
-exports.isMainProfile = function() {
-    return true
+exports.isMainProfile = function(index) {
+    return config.profiles[index].isMainProfile
 }
