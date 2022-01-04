@@ -32,6 +32,27 @@ function onDistroLoad(data){
     ipcRenderer.send('distributionIndexDone', data != null)
 }
 
+VersionManager.pullRemote().then(() => {
+    logger.log('Loaded version_manifest')
+}).catch((err) => {
+    logger.log('Failed to load version_manifest')
+    logger.error(err)
+
+    logger.log('Attempting to load an older version of the version manifest.')
+    // Try getting a local copy, better than nothing.
+    VersionManager.pullLocal().then(() => {
+        logger.log('Successfully loaded an older version of the version manifest.')
+
+    }).catch((err) => {
+
+        logger.log('Failed to load an older version of the version manifest.')
+        logger.log('Application cannot run.')
+        logger.error(err)
+
+    })
+
+})
+
 // Ensure Distribution is downloaded and cached.
 DistroManager.pullRemote().then((data) => {
     logger.log('Loaded distribution index.')

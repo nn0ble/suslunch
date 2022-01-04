@@ -264,7 +264,7 @@ function populateServerListings(){
 
     for(x = 0; x < VersionManager.amountOfProfiles(); x++) {
         htmlString += `<button class="serverListing" servid="${VersionManager.getID(x)}" ${VersionManager.getID(x) === giaSel ? 'selected' : ''}>
-        <img class="serverListingImg" src="https://github.com/nn0ble/suslunch/blob/28a98bc773bfa657f9ddc85f147ba244d7fd9d90/app/assets/images/icons/ProfileIcon.png?raw=true"/>
+        <img class="serverListingImg" src="${VersionManager.getIcon(x)}"/>
         <div class="serverListingDetails">
             <span class="serverListingName">${VersionManager.getName(x)}</span>
             <span class="serverListingDescription">${VersionManager.getDescription(x)}</span>
