@@ -1,4 +1,4 @@
-<p align="center"><img src="./app/assets/images/SealCircle.png" width="150px" height="150px" alt="aventium softworks"></p>
+<p align="center"><img src="./app/assets/images/SealCircle.webp" width="150px" height="150px" alt="green beans"></p>
 
 <h1 align="center">The Unofficial Feather64 Launcher</h1>
 
@@ -8,8 +8,8 @@
 
 <p align="center">Join modded servers without worrying about installing Java, Forge, or other mods. We'll handle that for you.</p>
 
-![Screenshot 1](https://i.imgur.com/6o7SmH6.png)
-![Screenshot 2](https://i.imgur.com/x3B34n1.png)
+![Screenshot 1](https://ibb.co/gJd23PX)
+![Screenshot 2](https://ibb.co/k6pJPGn)
 
 ## Features
 
