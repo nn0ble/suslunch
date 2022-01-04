@@ -101,7 +101,7 @@ document.getElementById('launch_button').addEventListener('click', function(e){
         authorization: ConfigManager.getSelectedAccount(),
         root: ConfigManager.getDataDirectory(),
         version: {
-            number: VersionManager.getProfile(ConfigManager.getSelectedServer()).version,
+            number: VersionManager.getProfile(ConfigManager.getSelectedServer().id).version,
             type: "release"
         },
         memory: {
