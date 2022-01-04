@@ -121,10 +121,10 @@ document.getElementById('launch_button').addEventListener('click', function(e){
     setLaunchDetails(Lang.queryJS('landing.launch.pleaseWait'))
     toggleLaunchArea(true)
     setLaunchPercentage(0, 100)
-    launcher.on('progress', (e) => {
+    launcher.on('download-status', (e) => {
         console.log(e)
-        if(e.task > 0) {
-            setLaunchPercentage(e.task, 100)
+        if(e.task >= 0 && e.task < e.total) {
+            setLaunchPercentage(e.current, e.total)
         } else {
             setLaunchPercentage(100, 100)
             setLaunchDetails('Launching game..')
