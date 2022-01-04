@@ -378,6 +378,15 @@ function bindProfileSelect() {
         }
     })
 }
+
+function bindVersionSelect() {
+    let val = document.getElementById('versions')
+    val.onchange = (e) => {
+        VersionManager.setVersion(0, val.value)
+        VersionManager.save()
+    }
+}
+
 /**
  * Bind functionality for the Delete Profile button. If the Profile was
  * the selected Profile, another Profile will be selected and the UI will
@@ -586,6 +595,7 @@ function populateProfiles() {
 
     let authAccountStr = ''
     let versionStr = ''
+    let selectedIndex = ''
 
     let vi = VersionManager.getVersions()
     let versions = vi.getVersions()
@@ -610,7 +620,6 @@ function populateProfiles() {
                     </div>
                     <div class="settingsAuthAccountDetailPane">
                         <div class="settingsAuthAccountDetailTitle">Version</div>
-                        <div class="settingsAuthAccountDetailValue">${VersionManager.getVersion(0)}</div>
                         <select id="versions">
                                 ${versionStr}
                         </select> 
@@ -636,7 +645,7 @@ function populateProfiles() {
                         <div class="settingsAuthAccountDetailPane">
                             <div class="settingsAuthAccountDetailTitle">Version</div>
                             <div class="settingsAuthAccountDetailValue">${VersionManager.getVersion(x)}</div>
-                            <select id="versions">
+                            <select id="versions" onchange="${ConfigManager.setSelectedServer("this.selectedIndex")}">
                                 ${versionStr}
                             </select> 
                         </div>
@@ -669,6 +678,7 @@ function prepareAccountsTab() {
 function prepareProfilesTab() {
     populateProfiles()
     bindProfileSelect()
+    bindVersionSelect()
     bindProfileDelete()
 }
 

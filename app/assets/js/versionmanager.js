@@ -167,6 +167,9 @@ exports.getDescription = function(index){
 exports.getVersion = function(index){
     return config.profiles[index].version
 }
+exports.setVersion = function(index, version){
+    config.profiles[index].version = version
+}
 
 exports.isMainProfile = function(index) {
     return config.profiles[index].isMainProfile
