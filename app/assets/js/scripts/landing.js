@@ -181,8 +181,7 @@ function updateSelectedServer(serv){
 }
 
 // Real text is set in uibinder.js on distributionIndexDone.
-let selectedProfile = VersionManager.getProfile(ConfigManager.getSelectedServer())
-server_selection_button.innerHTML = selectedProfile.name
+server_selection_button.innerHTML = VersionManager.getName(0) // ASFSDGASDFHSDFHASEDFSDFH WHAT
 server_selection_button.onclick = (e) => {
     e.target.blur()
     toggleServerSelection(true)
