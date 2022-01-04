@@ -1,7 +1,6 @@
 /**
  * Script for overlay.ejs
  */
-
 /* Overlay Wrapper Functions */
 
 /**
@@ -175,18 +174,12 @@ document.getElementById('serverSelectConfirm').addEventListener('click', () => {
     const listings = document.getElementsByClassName('serverListing')
     for(let i=0; i<listings.length; i++){
         if(listings[i].hasAttribute('selected')){
-            const serv = DistroManager.getDistribution().getServer(listings[i].getAttribute('servid'))
-            //updateSelectedServer(serv)
-            refreshServerStatus(true)
+            const serv = VersionManager.getProfile(listings[i].getAttribute('servid'))
+            updateSelectedServer(serv)
+            //refreshServerStatus(true)
             toggleOverlay(false)
             return
         }
-    }
-    // None are selected? Not possible right? Meh, handle it.
-    if(listings.length > 0){
-        const serv = DistroManager.getDistribution().getServer(listings[i].getAttribute('servid'))
-        //updateSelectedServer(serv)
-        toggleOverlay(false)
     }
 })
 
@@ -263,17 +256,21 @@ function setAccountListingHandlers(){
 
 function populateServerListings(){
 
-    const VersionManager = require('./assets/js/versionmanager')
+    
     const giaSel = ConfigManager.getSelectedServer()
     let htmlString = ''
-    htmlString += `<button class="serverListing" servid="${VersionManager.getVersion(0)}" selected>
-        <img class="serverListingImg" src="${VersionManager.getIcon(0)}"/>
+
+    // /${serv.getID() === giaSel ? 'selected' : ''}
+
+    for(x = 0; x < VersionManager.amountOfProfiles(); x++) {
+        htmlString += `<button class="serverListing" servid="${VersionManager.getID(x)}" ${VersionManager.getID(x) === giaSel ? 'selected' : ''}>
+        <img class="serverListingImg" src="https://github.com/nn0ble/suslunch/blob/28a98bc773bfa657f9ddc85f147ba244d7fd9d90/app/assets/images/icons/ProfileIcon.png?raw=true"/>
         <div class="serverListingDetails">
-            <span class="serverListingName">${VersionManager.getName(0)}</span>
-            <span class="serverListingDescription">${VersionManager.getDescription(0)}</span>
+            <span class="serverListingName">${VersionManager.getName(x)}</span>
+            <span class="serverListingDescription">${VersionManager.getDescription(x)}</span>
             <div class="serverListingInfo">
-                <div class="serverListingVersion">${VersionManager.getVersion(0)}</div>
-                ${VersionManager.isMainProfile(0) ? `<div class="serverListingStarWrapper">
+                <div class="serverListingVersion">${VersionManager.getVersion(x)}</div>
+                ${VersionManager.isMainProfile(x) ? `<div class="serverListingStarWrapper">
                     <svg id="Layer_1" viewBox="0 0 107.45 104.74" width="20px" height="20px">
                         <defs>
                             <style>.cls-1{fill:#fff;}.cls-2{fill:none;stroke:#fff;stroke-miterlimit:10;}</style>
@@ -286,6 +283,9 @@ function populateServerListings(){
             </div>
         </div>
     </button>`
+    }
+
+    
     document.getElementById('serverSelectListScrollable').innerHTML = htmlString
 
 }
@@ -306,7 +306,7 @@ function populateAccountListings(){
 
 function prepareServerSelectionList(){
     populateServerListings()
-    //setServerListingHandlers()
+    setServerListingHandlers()
 }
 
 function prepareAccountSelectionList(){

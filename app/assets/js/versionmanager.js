@@ -1,3 +1,4 @@
+const { profile } = require('console')
 const fs   = require('fs-extra')
 const os   = require('os')
 const path = require('path')
@@ -174,4 +175,24 @@ exports.getVersion = function(index){
 
 exports.isMainProfile = function(index) {
     return config.profiles[index].isMainProfile
+}
+
+exports.amountOfProfiles = function() {
+    return Object.keys(config.profiles).length
+}
+
+exports.getMainProfile = function() {
+    for(x = 0; x < this.amountOfProfiles(); ++x) {
+        if (config.profiles[x].mainServer) {
+            return config.profiles[x]
+        }
+    }
+}
+
+exports.getProfile = function(id) {
+    for(const profile of config.profiles) {
+        if(profile.id == id) {
+            return profile
+        } 
+    }
 }

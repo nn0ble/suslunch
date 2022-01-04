@@ -12,6 +12,7 @@ const DiscordWrapper          = require('./assets/js/discordwrapper')
 const Mojang                  = require('./assets/js/mojang')
 const ProcessBuilder          = require('./assets/js/processbuilder')
 const ServerStatus            = require('./assets/js/serverstatus')
+const VersionManager          = require('./assets/js/versionmanager')
 const { config } = require('process')
 
 // Launch Elements
@@ -100,11 +101,8 @@ document.getElementById('launch_button').addEventListener('click', function(e){
         authorization: ConfigManager.getSelectedAccount(),
         root: ConfigManager.getDataDirectory(),
         version: {
-            number: ConfigManager.getVersion(),
+            number: VersionManager.getProfile(ConfigManager.getSelectedServer()).version,
             type: "release"
-        },
-        server: {
-            host: "hypixel.net"
         },
         memory: {
             max: ConfigManager.getMaxRAM(),
@@ -168,22 +166,23 @@ function updateSelectedAccount(profile){
 updateSelectedAccount(ConfigManager.getSelectedAccount())
 
 // Bind selected server
-/*
+
 function updateSelectedServer(serv){
     if(getCurrentView() === VIEWS.settings){
         saveAllModConfigurations()
     }
-    ConfigManager.setSelectedServer(serv != null ? serv.getID() : null)
+    ConfigManager.setSelectedServer(serv != null ? serv.id : null)
     ConfigManager.save()
-    server_selection_button.innerHTML = '\u2022 ' + (serv != null ? serv.getName() : 'No Server Selected')
+    server_selection_button.innerHTML = '\u2022 ' + (serv != null ? serv.name : 'No Profile Selected')
     if(getCurrentView() === VIEWS.settings){
         animateModsTabRefresh()
     }
     setLaunchEnabled(serv != null)
 }
-*/
+
 // Real text is set in uibinder.js on distributionIndexDone.
-server_selection_button.innerHTML = '\u2022 Minecraft Version ' + ConfigManager.getVersion()
+let selectedProfile = VersionManager.getProfile(ConfigManager.getSelectedServer())
+server_selection_button.innerHTML = selectedProfile.name
 server_selection_button.onclick = (e) => {
     e.target.blur()
     toggleServerSelection(true)
@@ -248,6 +247,7 @@ const refreshMojangStatuses = async function(){
     document.getElementById('mojang_status_icon').style.color = Mojang.statusToHex(status)
 }
 
+/*
 const refreshServerStatus = async function(fade = false){
     loggerLanding.log('Refreshing Server Status')
     const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
@@ -279,13 +279,13 @@ const refreshServerStatus = async function(fade = false){
     }
     
 }
-
+*/
 refreshMojangStatuses()
 // Server Status is refreshed in uibinder.js on distributionIndexDone.
 
 // Set refresh rate to once every 5 minutes.
 let mojangStatusListener = setInterval(() => refreshMojangStatuses(true), 300000)
-let serverStatusListener = setInterval(() => refreshServerStatus(true), 300000)
+//let serverStatusListener = setInterval(() => refreshServerStatus(true), 300000)
 
 /**
  * Shows an error overlay, toggles off the launch area.

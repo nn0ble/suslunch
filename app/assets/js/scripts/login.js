@@ -2,6 +2,8 @@ const {
     Client,
     Authenticator
 } = require('minecraft-launcher-core');
+    
+const msmc = require("msmc");
 /**
  * Script for login.ejs
  */
@@ -310,13 +312,8 @@ loginButton.addEventListener('click', () => {
 // Bind Microsoft login button behavior.
 msloginButton.addEventListener('click', () => {
 
-    
-const msmc = require("msmc");
-const fetch = require("node-fetch");
-
     // Show loading stuff.
     loginLoading(true)
-    msmc.setFetch(fetch);
     msmc.fastLaunch("raw",
         (update) => {
             //A hook for catching loading bar events and errors, standard with MSMC
@@ -333,9 +330,6 @@ const fetch = require("node-fetch");
         updateSelectedAccount(result.profile)
         
         ConfigManager.addAuthAccount(result.profile.id, result.access_token, result.profile.name, 'msa');
-        if(ConfigManager.getClientToken() == null){
-            ConfigManager.setClientToken(token)
-        }
         ConfigManager.save()
 
         msloginButton.innerHTML = msloginButton.innerHTML.replace(Lang.queryJS('login.loggingIn'), Lang.queryJS('login.success'))

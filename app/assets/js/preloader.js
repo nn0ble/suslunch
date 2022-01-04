@@ -22,11 +22,12 @@ function onDistroLoad(data){
     if(data != null){
         
         // Resolve the selected server if its value has yet to be set.
+        /*
         if(ConfigManager.getSelectedServer() == null || data.getServer(ConfigManager.getSelectedServer()) == null){
             logger.log('Determining default selected server..')
             ConfigManager.setSelectedServer(data.getMainServer().getID())
             ConfigManager.save()
-        }
+        }*/
     }
     ipcRenderer.send('distributionIndexDone', data != null)
 }
@@ -60,6 +61,18 @@ DistroManager.pullRemote().then((data) => {
     })
 
 })
+
+function onProfileLoad(){
+    // Resolve the selected server if its value has yet to be set.
+    if(ConfigManager.getSelectedServer() == null){
+        logger.log('Determining default selected server..')
+        ConfigManager.setSelectedServer(VersionManager.getMainProfile().id)
+        ConfigManager.save()
+    }
+}
+
+logger.log('Loaded Profiles')
+onProfileLoad()
 
 // Clean up temp dir incase previous launches ended unexpectedly. 
 fs.remove(path.join(os.tmpdir(), ConfigManager.getTempNativeFolder()), (err) => {

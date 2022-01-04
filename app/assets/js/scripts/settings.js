@@ -132,7 +132,7 @@ function initSettingsValues(){
                 if(v.type === 'number' || v.type === 'text'){
                     // Special Conditions
                     if(cVal === 'JavaExecutable'){
-                        populateJavaExecDetails(v.value)
+                        //populateJavaExecDetails(v.value)
                         v.value = gFn()
                     } else if (cVal === 'DataDirectory'){
                         v.value = gFn()
@@ -513,10 +513,10 @@ function resolveModsForUI(){
     const distro = DistroManager.getDistribution()
     const servConf = ConfigManager.getModConfiguration(serv)
 
-    const modStr = parseModulesForUI(distro.getServer(serv).getModules(), false, servConf.mods)
+    //const modStr = parseModulesForUI(distro.getServer(serv).getModules(), false, servConf.mods)
 
-    document.getElementById('settingsReqModsContent').innerHTML = modStr.reqMods
-    document.getElementById('settingsOptModsContent').innerHTML = modStr.optMods
+    //document.getElementById('settingsReqModsContent').innerHTML = modStr.reqMods
+    //document.getElementById('settingsOptModsContent').innerHTML = modStr.optMods
 }
 
 /**
@@ -654,8 +654,8 @@ let CACHE_DROPIN_MODS
  */
 function resolveDropinModsForUI(){
     const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
-    CACHE_SETTINGS_MODS_DIR = path.join(ConfigManager.getInstanceDirectory(), serv.getID(), 'mods')
-    CACHE_DROPIN_MODS = DropinModUtil.scanForDropinMods(CACHE_SETTINGS_MODS_DIR, serv.getMinecraftVersion())
+    CACHE_SETTINGS_MODS_DIR = path.join(ConfigManager.getInstanceDirectory(), "Example_Server", 'mods')
+    CACHE_DROPIN_MODS = DropinModUtil.scanForDropinMods(CACHE_SETTINGS_MODS_DIR, "123")
 
     let dropinMods = ''
 
@@ -793,7 +793,7 @@ let CACHE_SELECTED_SHADERPACK
  */
 function resolveShaderpacksForUI(){
     const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
-    CACHE_SETTINGS_INSTANCE_DIR = path.join(ConfigManager.getInstanceDirectory(), serv.getID())
+    CACHE_SETTINGS_INSTANCE_DIR = path.join(ConfigManager.getInstanceDirectory(), "Example_Server")
     CACHE_SHADERPACKS = DropinModUtil.scanForShaderpacks(CACHE_SETTINGS_INSTANCE_DIR)
     CACHE_SELECTED_SHADERPACK = DropinModUtil.getEnabledShaderpack(CACHE_SETTINGS_INSTANCE_DIR)
 
@@ -868,17 +868,16 @@ function bindShaderpackButton() {
  * Load the currently selected server information onto the mods tab.
  */
 function loadSelectedServerOnModsTab(){
-    const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
+    const serv = VersionManager.getProfile(ConfigManager.getSelectedServer())
 
     document.getElementById('settingsSelServContent').innerHTML = `
-        <img class="serverListingImg" src="${serv.getIcon()}"/>
+        <img class="serverListingImg" src="${serv.icon}"/>
         <div class="serverListingDetails">
-            <span class="serverListingName">${serv.getName()}</span>
-            <span class="serverListingDescription">${serv.getDescription()}</span>
+            <span class="serverListingName">${serv.name}</span>
+            <span class="serverListingDescription">${serv.description}</span>
             <div class="serverListingInfo">
-                <div class="serverListingVersion">${serv.getMinecraftVersion()}</div>
-                <div class="serverListingRevision">${serv.getVersion()}</div>
-                ${serv.isMainServer() ? `<div class="serverListingStarWrapper">
+                <div class="serverListingVersion">${serv.version}</div>
+                ${serv.isMainServer ? `<div class="serverListingStarWrapper">
                     <svg id="Layer_1" viewBox="0 0 107.45 104.74" width="20px" height="20px">
                         <defs>
                             <style>.cls-1{fill:#fff;}.cls-2{fill:none;stroke:#fff;stroke-miterlimit:10;}</style>
@@ -1136,8 +1135,9 @@ function populateMemoryStatus(){
  * 
  * @param {string} execPath The executable path to populate against.
  */
+/*
 function populateJavaExecDetails(execPath){
-    const jg = new JavaGuard(DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getMinecraftVersion())
+    const jg = new JavaGuard(DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getVersion())
     jg._validateJavaBinary(execPath).then(v => {
         if(v.valid){
             const vendor = v.vendor != null ? ` (${v.vendor})` : ''
@@ -1151,6 +1151,7 @@ function populateJavaExecDetails(execPath){
         }
     })
 }
+*/
 
 /**
  * Prepare the Java tab for display.
