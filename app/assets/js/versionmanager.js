@@ -1,5 +1,6 @@
 const { profile } = require('console')
-const fs   = require('fs')
+const fse   = require('fs')
+const fs   = require('fs-extra')
 const os   = require('os')
 const path = require('path')
 const request = require('request')
@@ -293,7 +294,7 @@ exports.pullRemote = function(){
             const distroDest = path.join(ConfigManager.getLauncherDirectory(), 'version_manifest.json')
             request(opts, (error, resp, body) => {
                 if(!error){
-                    fs.writeFile(distroDest, body, 'utf-8', (err) => {
+                    fse.writeFile(distroDest, body, 'utf-8', (err) => {
                         if(!err){
                             data = VersionsIndex.fromJSON(JSON.parse(body))
                             resolve(data)
@@ -312,7 +313,7 @@ exports.pullRemote = function(){
 }
 exports.pullLocal = function(){
     return new Promise((resolve, reject) => {
-        fs.readFile(MANIFEST_PATH, 'utf-8', (err, d) => {
+        fse.readFile(MANIFEST_PATH, 'utf-8', (err, d) => {
             if(!err){
                 data = VersionIndex.fromJSON(JSON.parse(d))
                 return
