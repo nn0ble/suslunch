@@ -6,10 +6,12 @@
 
 [<p align="center"><img src="https://img.shields.io/travis/dscalzi/HeliosLauncher.svg?style=for-the-badge" alt="travis">](https://travis-ci.org/dscalzi/HeliosLauncher) [<img src="https://img.shields.io/github/downloads/dscalzi/HeliosLauncher/total.svg?style=for-the-badge" alt="downloads">](https://github.com/dscalzi/HeliosLauncher/releases) <img src="https://forthebadge.com/images/badges/winter-is-coming.svg"  height="28px" alt="stark"></p>
 
-<p align="center">Join modded servers without worrying about installing Java, Forge, or other mods. We'll handle that for you.</p>
+<p align="center">Join Feather64 without worrying about installing Java, Forge, or other mods. We'll handle that for you.</p>
 
 ![Screenshot 1](https://i.ibb.co/VTx1tQh/image.png)
 ![Screenshot 2](https://i.ibb.co/93JhdpX/image.png)
+
+I want to Reiterate before anyone gets confused, this is a fork of HeliosLauncher by dscalzi, I used his launcher because i liked the theming, I have changed most if not all of the authentication code and many other things, there is and will likely be for a while leftover code that is not doing anything, if this is an issue, please file a bug report, I do not take credit for the design of this launcher in any way.
 
 ## Features
 
