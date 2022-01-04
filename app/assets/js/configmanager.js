@@ -289,6 +289,10 @@ exports.getSelectedServer = function(def = false){
     return !def ? config.selectedServer : DEFAULT_CONFIG.clientToken
 }
 
+exports.getSelectedServerVersion = function () {
+    return config.selectedServer.version
+}
+
 /**
  * Set the ID of the selected serverpack.
  * 

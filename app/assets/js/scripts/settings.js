@@ -1070,7 +1070,7 @@ function bindShaderpackButton() {
  * Load the currently selected server information onto the mods tab.
  */
 function loadSelectedServerOnModsTab() {
-    const serv = ConfigManager.getSelectedServer()
+    const serv = VersionManager.getProfile(ConfigManager.getSelectedServer())
 
     document.getElementById('settingsSelServContent').innerHTML = `
         <img class="serverListingImg" src="${serv.icon}"/>

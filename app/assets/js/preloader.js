@@ -87,7 +87,7 @@ function onProfileLoad(){
     // Resolve the selected server if its value has yet to be set.
     if(ConfigManager.getSelectedServer() == null){
         logger.log('Determining default selected server..')
-        ConfigManager.setSelectedServer(VersionManager.getProfileByIndex(0))
+        ConfigManager.setSelectedServer(VersionManager.getProfileByIndex(0).id)
         ConfigManager.save()
     }
 }

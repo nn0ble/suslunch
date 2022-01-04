@@ -88,6 +88,8 @@ function setLaunchEnabled(val){
 
 // Bind launch button
 document.getElementById('launch_button').addEventListener('click', function(e){
+
+    let version = VersionManager.getProfile(ConfigManager.getSelectedServer()).version
     
     const launcher = new Client();
 
@@ -101,7 +103,7 @@ document.getElementById('launch_button').addEventListener('click', function(e){
         authorization: ConfigManager.getSelectedAccount(),
         root: ConfigManager.getDataDirectory(),
         version: {
-            number: VersionManager.getProfile(ConfigManager.getSelectedServer().id).version,
+            number: version,
             type: "release"
         },
         memory: {
@@ -125,8 +127,6 @@ document.getElementById('launch_button').addEventListener('click', function(e){
         console.log(e)
         toggleLaunchArea(true)
         setLaunchPercentage(Math.round(e.current), Math.round(e.total))
-        
-        
     });
     toggleLaunchArea(false)
 })
