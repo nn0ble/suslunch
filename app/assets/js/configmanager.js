@@ -88,7 +88,8 @@ const DEFAULT_CONFIG = {
             fullscreen: false,
             autoConnect: true,
             launchDetached: true,
-            version: '1.18.1'
+            version: '1.18.1',
+            usingFabric: false
         },
         launcher: {
             allowPrerelease: false,
@@ -313,6 +314,14 @@ exports.getAuthAccounts = function(){
 
 exports.getVersion = function(){
     return config.settings.game.version
+}
+
+exports.usingFabric = function(){
+    return config.settings.game.usingFabric
+}
+
+exports.setUsingFabric = function(bl){
+    config.settings.game.usingFabric = bl
 }
 
 /**

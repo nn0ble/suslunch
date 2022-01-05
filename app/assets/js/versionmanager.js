@@ -51,7 +51,9 @@ const DEFAULT_CONFIG = {
             name: "Default Config",
             description: "Launches Minecraft 1.18.1",
             icon: "https://github.com/nn0ble/suslunch/blob/92dc45b12e1bf05874ede645d6119c82c9e6a005/app/assets/images/icons/ProfileIcon.png?raw=true",
-            version: "1.18.1"
+            version: "1.18.1",
+            type: "release",
+            isMainServer: false
         }
     ]
 }
@@ -172,6 +174,10 @@ exports.setVersion = function(index, version){
     config.profiles[index].version = version
 }
 
+exports.setType = function(index, type){
+    config.profiles[index].type = type
+}
+
 exports.isMainProfile = function(index) {
     return config.profiles[index].isMainProfile
 }
@@ -226,6 +232,9 @@ class Version {
     getID(){
         return this.id
     }
+    getType(){
+        return this.type
+    }
 }
 exports.Server
 
@@ -258,7 +267,7 @@ class VersionsIndex {
     /**
      * @returns {Array.<Server>} An array of declared server configurations.
      */
-    getVersions(){
+    getVersions() {
         return this.versions
     }
 
@@ -282,7 +291,7 @@ class VersionsIndex {
 }
 exports.VersionsIndex
 
-data = null
+versionData = null
 
 exports.pullRemote = function(){
     distroURL = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
@@ -296,8 +305,8 @@ exports.pullRemote = function(){
                 if(!error){
                     fse.writeFile(distroDest, body, 'utf-8', (err) => {
                         if(!err){
-                            data = VersionsIndex.fromJSON(JSON.parse(body))
-                            resolve(data)
+                            versionData = VersionsIndex.fromJSON(JSON.parse(body))
+                            resolve(versionData)
                             return
                         } else {
                             reject(err)
@@ -315,7 +324,7 @@ exports.pullLocal = function(){
     return new Promise((resolve, reject) => {
         fse.readFile(MANIFEST_PATH, 'utf-8', (err, d) => {
             if(!err){
-                data = VersionIndex.fromJSON(JSON.parse(d))
+                versionData = VersionsIndex.fromJSON(JSON.parse(d))
                 return
             } else {
                 reject(err)
@@ -324,6 +333,6 @@ exports.pullLocal = function(){
         })
     })
 }
-exports.getVersions = function() {
-    return data
+exports.getIndex = function() {
+    return versionData
 }

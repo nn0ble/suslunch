@@ -5,6 +5,7 @@ const path          = require('path')
 
 const ConfigManager = require('./configmanager')
 const VersionManager = require('./versionmanager')
+const FabricManager = require('./fabricmanager')
 const DistroManager = require('./distromanager')
 const LangLoader    = require('./langloader')
 const logger        = require('./loggerutil')('%c[Preloader]', 'color: #a02d2a; font-weight: bold')
@@ -14,6 +15,7 @@ logger.log('Loading..')
 // Load ConfigManager
 ConfigManager.load()
 VersionManager.load()
+//FabricManager.load() dunno
 
 // Load Strings
 LangLoader.loadLanguage('en_US')
@@ -31,6 +33,25 @@ function onDistroLoad(data){
     }
     ipcRenderer.send('distributionIndexDone', data != null)
 }
+
+FabricManager.pullRemote().then(() => {
+    logger.log('Loaded fabric_meta')
+}).catch((err) => {
+    logger.log('Failed to load fabric_meta')
+    logger.error(err)
+    //logger.log('Attempting to load an older version of the fabric_meta')
+    // Try getting a local copy, better than nothing.
+    /*
+    FabricManager.pullLocal().then(() => {
+        logger.log('Successfully loaded an older version of the fabric_meta')
+    }).catch((err) => {
+
+        logger.log('Failed to load an older version of the fabric_meta')
+        logger.log('Application cannot run.')
+        logger.error(err)
+
+    })*/
+})
 
 VersionManager.pullRemote().then(() => {
     logger.log('Loaded version_manifest')
