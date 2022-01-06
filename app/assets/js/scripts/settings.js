@@ -633,7 +633,7 @@ function populateProfiles() {
                         <select id="versions">
                                 ${versionStr}
                         </select>
-                        <input type="checkbox" id="fabricBool" name="Use Fabric?" ${ConfigManager.usingFabric() ? 'checked' : ''}>
+                        <p>Use Fabric?<input type="checkbox" id="fabricBool" name="Use Fabric?" ${ConfigManager.usingFabric() ? 'checked' : ''}></p>
                     </div>
                 </div>
                 <div class="settingsAuthAccountActions">

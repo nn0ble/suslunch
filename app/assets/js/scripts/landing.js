@@ -126,6 +126,9 @@ document.getElementById('launch_button').addEventListener('click', function (e) 
                     width: ConfigManager.getGameWidth(),
                     height: ConfigManager.getGameHeight(),
                     fullscreen: ConfigManager.getFullscreen()
+                },
+                overrides: {
+                    detached: false
                 }
             }
 
